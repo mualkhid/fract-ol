@@ -6,12 +6,11 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:57 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/05 15:17:12 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:23:53 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
 
 void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractol *fractal)
 {
@@ -46,37 +45,6 @@ t_complex	get_mapped_coordinates(int x, int y, t_fractol *fractal)
 	return (z);
 }
 
-// int track_and_map_coordinates(int x, int y, t_fractol *fractol)
-// {
-//     t_mappingrange range_x;
-//     t_mappingrange range_y;
-//     t_complex z;
-
-//     range_x.n_min = -2;
-//     range_x.n_max = +2;
-//     range_x.o_min = 0;
-//     range_x.o_max = WIDTH;
-//     range_y.n_min = +2;
-//     range_y.n_max = -2;
-//     range_y.o_min = 0;
-//     range_y.o_max = HEIGHT;
-
-//     if (!ft_strncmp(fractol->name, "julia", 5) && !fractol->is_locked)
-//     {
-//         fractol->julia_x = map(x, range_x) * fractol->zoom;
-//         fractol->julia_y = map(y, range_y) * fractol->zoom;
-//         fractol_render(fractol);  // Render Julia set if specific conditions are met
-//     }
-//     else
-//     {
-//         z.x = map(x, range_x) * fractol->zoom + fractol->shift_x;
-//         z.y = map(y, range_y) * fractol->zoom + fractol->shift_y;
-//     }
-//     return(0);
-// }
-
-
-
 int	get_color_for_pixel(t_complex z, t_complex c, t_fractol *fractal)
 {
 	int				i;
@@ -106,13 +74,10 @@ void	handle_pixel(int x, int y, t_fractol *fractal)
 	t_complex	c;
 
 	z = get_mapped_coordinates(x, y, fractal);
-
 	mandel_vs_julia(&z, &c, fractal);
 	color = get_color_for_pixel(z, c, fractal);
 	my_pixel_put(x, y, &fractal->img, color);
 }
-
-
 
 void	fractol_render(t_fractol *fractol)
 {
@@ -126,10 +91,6 @@ void	fractol_render(t_fractol *fractol)
 		while (++x < WIDTH)
 			handle_pixel(x, y, fractol);
 	}
-	mlx_put_image_to_window(fractol->mlx_connection,
-		fractol->mlx_window,
-		fractol->img.img_ptr,
-		0,
-		0);
+	mlx_put_image_to_window(fractol->mlx_connection, fractol->mlx_window,
+		fractol->img.img_ptr, 0, 0);
 }
-

@@ -14,13 +14,13 @@
 # define FRACTOL_H
 
 # include "./mlx/mlx.h"
+# include <ApplicationServices/ApplicationServices.h>
+# include <ctype.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
-#include <ctype.h>
-#include <string.h>
-#include <ApplicationServices/ApplicationServices.h>
 
 # define ERROR_MESSAGE "Enter\n\t\" Mandelbrot\" or\n\t\" Julia <v1> <v2>\""
 
@@ -108,11 +108,8 @@ int				get_color_for_pixel(t_complex z, t_complex c,
 					t_fractol *fractal);
 void			handle_pixel(int x, int y, t_fractol *fractal);
 int				resize_handler(int x, int y, t_fractol *fractol);
-void	my_pixel_put(int x, int y, t_img *img, int color);
-
-
+void			my_pixel_put(int x, int y, t_img *img, int color);
 
 // int track_and_map_coordinates(int x, int y, t_fractol *fractol);
-
 
 #endif

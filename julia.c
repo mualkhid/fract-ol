@@ -21,7 +21,7 @@ int	check_julia_parameters(t_fractol *fractal, char **av)
 	}
 	if (!is_valid_julia_parameter(av[2]) || !is_valid_julia_parameter(av[3]))
 	{
-		ft_putstr_fd("Invalid Julia parameters",STDERR_FILENO);
+		ft_putstr_fd("Invalid Julia parameters", STDERR_FILENO);
 		return (0);
 	}
 	fractal->julia_x = atodbl(av[2]);
