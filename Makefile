@@ -14,7 +14,7 @@
 
 NAME = fractol
 
-FILES = events.c init.c fractol.c math_utils.c render.c string_utils.c events2.c fractolrender.c julia.c
+FILES = handler.c init.c fractol.c fractal_math.c render.c str_utils.c keys.c julia.c
 
 OBJ = $(FILES:.c=.o)
 

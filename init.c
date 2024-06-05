@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-#include "events.h"
 #include "fractol.h"
 
 void	malloc_error(void)

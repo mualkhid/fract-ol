@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "fractol.h"
 
 int	key_handler(int keycode, t_fractol *fractol)
@@ -19,9 +17,7 @@ int	key_handler(int keycode, t_fractol *fractol)
 	if (keycode == 53)
 		close_handler(fractol);
 	else if (keycode == 4)
-	{
 		fractol->is_locked = !fractol->is_locked;
-	}
 	else if (!fractol->is_locked)
 	{
 		if (keycode == 124 || keycode == 123)

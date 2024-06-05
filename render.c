@@ -10,18 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-#include "events.h"
 #include "fractol.h"
 
-void	my_pixel_put(int x, int y, t_img *img, int color)
-{
-	int	offset;
-
-	offset = (y * img->line_len) + (x * (img->bpp / 8));
-	*(unsigned int *)(img->pixels_ptr + offset) = color;
-}
 
 void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractol *fractal)
 {
@@ -37,24 +27,55 @@ void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractol *fractal)
 	}
 }
 
-t_complex	get_mapped_coordinates(int x, int y, t_fractol *fractal)
-{
-	t_complex		z;
-	t_mappingrange	range_x;
-	t_mappingrange	range_y;
+// t_complex	get_mapped_coordinates(int x, int y, t_fractol *fractal)
+// {
+// 	t_complex		z;
+// 	t_mappingrange	range_x;
+// 	t_mappingrange	range_y;
 
-	range_x.n_min = -2;
-	range_x.n_max = +2;
-	range_x.o_min = 0;
-	range_x.o_max = WIDTH;
-	z.x = map(x, range_x) * fractal->zoom + fractal->shift_x;
-	range_y.n_min = +2;
-	range_y.n_max = -2;
-	range_y.o_min = 0;
-	range_y.o_max = HEIGHT;
-	z.y = map(y, range_y) * fractal->zoom + fractal->shift_y;
-	return (z);
+// 	range_x.n_min = -2;
+// 	range_x.n_max = +2;
+// 	range_x.o_min = 0;
+// 	range_x.o_max = WIDTH;
+// 	z.x = map(x, range_x) * fractal->zoom + fractal->shift_x;
+// 	range_y.n_min = +2;
+// 	range_y.n_max = -2;
+// 	range_y.o_min = 0;
+// 	range_y.o_max = HEIGHT;
+// 	z.y = map(y, range_y) * fractal->zoom + fractal->shift_y;
+// 	return (z);
+// }
+
+int track_and_map_coordinates(int x, int y, t_fractol *fractol)
+{
+    t_mappingrange range_x;
+    t_mappingrange range_y;
+    t_complex z;
+
+    range_x.n_min = -2;
+    range_x.n_max = +2;
+    range_x.o_min = 0;
+    range_x.o_max = WIDTH;
+    range_y.n_min = +2;
+    range_y.n_max = -2;
+    range_y.o_min = 0;
+    range_y.o_max = HEIGHT;
+
+    if (!ft_strncmp(fractol->name, "julia", 5) && !fractol->is_locked)
+    {
+        fractol->julia_x = map(x, range_x) * fractol->zoom;
+        fractol->julia_y = map(y, range_y) * fractol->zoom;
+        fractol_render(fractol);  // Render Julia set if specific conditions are met
+    }
+    else
+    {
+        z.x = map(x, range_x) * fractol->zoom + fractol->shift_x;
+        z.y = map(y, range_y) * fractol->zoom + fractol->shift_y;
+    }
+    return 0; 
 }
+
+
 
 int	get_color_for_pixel(t_complex z, t_complex c, t_fractol *fractal)
 {
@@ -84,8 +105,30 @@ void	handle_pixel(int x, int y, t_fractol *fractal)
 	t_complex	z;
 	t_complex	c;
 
-	z = get_mapped_coordinates(x, y, fractal);
+	z = track_and_map_coordinates(x, y, fractal);
 	mandel_vs_julia(&z, &c, fractal);
 	color = get_color_for_pixel(z, c, fractal);
 	my_pixel_put(x, y, &fractal->img, color);
 }
+
+
+
+void	fractol_render(t_fractol *fractol)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+			handle_pixel(x, y, fractol);
+	}
+	mlx_put_image_to_window(fractol->mlx_connection,
+		fractol->mlx_window,
+		fractol->img.img_ptr,
+		0,
+		0);
+}
+

@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "events.h"
 #include "fractol.h"
 
 double	map(double uns_num, t_mappingrange range)
@@ -36,4 +34,12 @@ t_complex	square_complex(t_complex z)
 	result.x = (z.x * z.x) - (z.y * z.y);
 	result.y = 2 * z.x * z.y;
 	return (result);
+}
+
+void	my_pixel_put(int x, int y, t_img *img, int color)
+{
+	int	offset;
+
+	offset = (y * img->line_len) + (x * (img->bpp / 8));
+	*(unsigned int *)(img->pixels_ptr + offset) = color;
 }
