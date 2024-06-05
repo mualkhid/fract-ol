@@ -6,7 +6,7 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:42 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/03 20:57:43 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:16:04 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,24 @@ int	is_valid_julia_parameter(const char *param)
 	return (valid);
 }
 
+int	julia_track(int x, int y, t_fractol *fractol)
+{
+	t_mappingrange	range_x;
+	t_mappingrange	range_y;
 
-
-// int	julia_track(int x, int y, t_fractol *fractol)
-// {
-// 	t_mappingrange	range_x;
-// 	t_mappingrange	range_y;
-
-// 	if (!ft_strncmp(fractol->name, "julia", 5) && !fractol->is_locked)
-// 	{
-// 		range_x.n_min = -2;
-// 		range_x.n_max = +2;
-// 		range_x.o_min = 0;
-// 		range_x.o_max = WIDTH;
-// 		fractol->julia_x = map(x, range_x) * fractol->zoom;
-// 		range_y.n_min = +2;
-// 		range_y.n_max = -2;
-// 		range_y.o_min = 0;
-// 		range_y.o_max = HEIGHT;
-// 		fractol->julia_y = map(y, range_y) * fractol->zoom;
-// 		fractol_render(fractol);
-// 	}
-// 	return (0);
-// }
+	if (!ft_strncmp(fractol->name, "julia", 5) && !fractol->is_locked)
+	{
+		range_x.n_min = -2;
+		range_x.n_max = +2;
+		range_x.o_min = 0;
+		range_x.o_max = WIDTH;
+		fractol->julia_x = map(x, range_x) * fractol->zoom;
+		range_y.n_min = +2;
+		range_y.n_max = -2;
+		range_y.o_min = 0;
+		range_y.o_max = HEIGHT;
+		fractol->julia_y = map(y, range_y) * fractol->zoom;
+		fractol_render(fractol);
+	}
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:25 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/03 20:57:26 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:16:21 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,18 @@ void			handle_up_down_keys(t_fractol *fractol, int keycode);
 void			handle_plus_minus_keys(t_fractol *fractol, int keycode);
 int				close_handler(t_fractol *fractol);
 int				mouse_handler(int button, int x, int y, t_fractol *fractol);
-// int				julia_track(int x, int y, t_fractol *fractal);
+int				julia_track(int x, int y, t_fractol *fractal);
 int				check_julia_parameters(t_fractol *fractal, char **av);
-// t_complex		get_mapped_coordinates(int x, int y, t_fractol *fractal);
+t_complex		get_mapped_coordinates(int x, int y, t_fractol *fractal);
 int				get_color_for_pixel(t_complex z, t_complex c,
 					t_fractol *fractal);
 void			handle_pixel(int x, int y, t_fractol *fractal);
 int				resize_handler(int x, int y, t_fractol *fractol);
+void	my_pixel_put(int x, int y, t_img *img, int color);
 
 
-int track_and_map_coordinates(int x, int y, t_fractol *fractol)
+
+// int track_and_map_coordinates(int x, int y, t_fractol *fractol);
 
 
 #endif
