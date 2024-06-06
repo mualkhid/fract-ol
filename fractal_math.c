@@ -6,7 +6,7 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:52 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/05 15:22:55 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:19:16 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ double	map(double uns_num, t_mappingrange range)
 			- range.o_min) + range.n_min);
 }
 
-t_complex	sum_complex(t_complex z1, t_complex z2)
+t_complex	ft_sum(t_complex z1, t_complex z2)
 {
 	t_complex	result;
 
@@ -27,7 +27,7 @@ t_complex	sum_complex(t_complex z1, t_complex z2)
 	return (result);
 }
 
-t_complex	square_complex(t_complex z)
+t_complex	ft_square(t_complex z)
 {
 	t_complex	result;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_utils.c                                     :+:      :+:    :+:   */
+/*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:58:09 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/03 20:58:10 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:24:45 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,11 @@ double	atodbl(char *s)
 		fractional = fractional + (*s++ - 48) * power;
 	}
 	return ((integer + fractional) * sign);
+}
+
+int	ft_isdigit(int c)
+{
+	if (!(c >= 48 && c <= 57))
+		return (0);
+	return (1);
 }

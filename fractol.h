@@ -6,7 +6,7 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:25 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/05 15:16:21 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:25:18 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ int				ft_strncmp(char *str1, char *str2, unsigned int n);
 void			ft_putstr_fd(char *s, int fd);
 double			atodbl(char *s);
 int				ft_strlen(char *str);
-int				is_valid_julia_parameter(const char *param);
-int				check_julia_parameters(t_fractol *fractal, char **av);
+int				parse_julia_param(const char *param);
+int				parse_julia(t_fractol *fractal, char **av);
 void			fractal_init(t_fractol *fractal);
 void			fractol_render(t_fractol *fractol);
 double			map(double uns_num, t_mappingrange range);
-t_complex		sum_complex(t_complex z1, t_complex z2);
-t_complex		square_complex(t_complex z);
+t_complex		ft_sum(t_complex z1, t_complex z2);
+t_complex		ft_square(t_complex z);
 int				key_handler(int keycode, t_fractol *fractol);
 void			handle_arrow_keys(t_fractol *fractol, int keycode);
 void			handle_up_down_keys(t_fractol *fractol, int keycode);
@@ -102,14 +102,13 @@ void			handle_plus_minus_keys(t_fractol *fractol, int keycode);
 int				close_handler(t_fractol *fractol);
 int				mouse_handler(int button, int x, int y, t_fractol *fractol);
 int				julia_track(int x, int y, t_fractol *fractal);
-int				check_julia_parameters(t_fractol *fractal, char **av);
+int				parse_julia(t_fractol *fractal, char **av);
 t_complex		get_mapped_coordinates(int x, int y, t_fractol *fractal);
 int				get_color_for_pixel(t_complex z, t_complex c,
 					t_fractol *fractal);
 void			handle_pixel(int x, int y, t_fractol *fractal);
 int				resize_handler(int x, int y, t_fractol *fractol);
 void			my_pixel_put(int x, int y, t_img *img, int color);
-
-// int track_and_map_coordinates(int x, int y, t_fractol *fractol);
+int				ft_isdigit(int c);
 
 #endif

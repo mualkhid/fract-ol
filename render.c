@@ -6,7 +6,7 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:57 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/05 15:23:53 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:19:16 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	get_color_for_pixel(t_complex z, t_complex c, t_fractol *fractal)
 	i = 0;
 	while (i < fractal->iterations_defintion)
 	{
-		z = sum_complex(square_complex(z), c);
+		z = ft_sum(ft_square(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
 		{
 			range_color.n_min = BLUE;

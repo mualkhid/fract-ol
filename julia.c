@@ -6,20 +6,20 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:42 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/05 15:16:04 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:22:28 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	check_julia_parameters(t_fractol *fractal, char **av)
+int	parse_julia(t_fractol *fractal, char **av)
 {
 	if (av[2] == NULL || av[3] == NULL)
 	{
 		ft_putstr_fd("Please provide both Julia parameters.\n", STDERR_FILENO);
 		return (0);
 	}
-	if (!is_valid_julia_parameter(av[2]) || !is_valid_julia_parameter(av[3]))
+	if (!parse_julia_param(av[2]) || !parse_julia_param(av[3]))
 	{
 		ft_putstr_fd("Invalid Julia parameters", STDERR_FILENO);
 		return (0);
@@ -36,7 +36,7 @@ int	check_julia_parameters(t_fractol *fractal, char **av)
 	return (1);
 }
 
-int	is_valid_julia_parameter(const char *param)
+int	parse_julia_param(const char *param)
 {
 	int	decimal_point_count;
 	int	length;
