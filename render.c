@@ -64,7 +64,7 @@ int	get_color_for_pixel(t_complex z, t_complex c, t_fractol *fractal)
 		}
 		i++;
 	}
-	return (RED);
+	return (MAGENTA_BURST);
 }
 
 void	handle_pixel(int x, int y, t_fractol *fractal)

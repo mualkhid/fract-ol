@@ -12,13 +12,13 @@
 
 #include "fractol.h"
 
-void	malloc_error(void)
+static void	malloc_error(void)
 {
 	perror("Problems with malloc");
 	exit(EXIT_FAILURE);
 }
 
-void	data_init(t_fractol *fractol)
+static void	data_init(t_fractol *fractol)
 {
 	fractol->escape_value = 4;
 	fractol->iterations_defintion = 42;
@@ -27,15 +27,15 @@ void	data_init(t_fractol *fractol)
 	fractol->zoom = 1.0;
 }
 
-void	events_init(t_fractol *fractolt_fractol)
+static void	hook_init(t_fractol *fractol)
 {
-	mlx_key_hook(fractolt_fractol->mlx_window, key_handler, fractolt_fractol);
-	mlx_mouse_hook(fractolt_fractol->mlx_window, mouse_handler,
-		fractolt_fractol);
-	mlx_hook(fractolt_fractol->mlx_window, 17, 1L << 17, close_handler,
-		fractolt_fractol);
-	mlx_hook(fractolt_fractol->mlx_window, 6, 1L << 6, julia_track,
-		fractolt_fractol);
+	mlx_key_hook(fractol->mlx_window, key_handler, fractol);
+	mlx_mouse_hook(fractol->mlx_window, mouse_handler,
+		fractol);
+	mlx_hook(fractol->mlx_window, 17, 1L << 17, close_handler,
+		fractol);
+	mlx_hook(fractol->mlx_window, 6, 1L << 6, julia_track,
+		fractol);
 }
 
 void	fractal_init(t_fractol *fractal)
@@ -61,6 +61,6 @@ void	fractal_init(t_fractol *fractal)
 	}
 	fractal->img.pixels_ptr = mlx_get_data_addr(fractal->img.img_ptr,
 			&fractal->img.bpp, &fractal->img.line_len, &fractal->img.endian);
-	events_init(fractal);
+	hook_init(fractal);
 	data_init(fractal);
 }

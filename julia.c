@@ -38,27 +38,27 @@ int	parse_julia(t_fractol *fractal, char **av)
 
 int	parse_julia_param(const char *param)
 {
-	int	decimal_point_count;
+	int	dp_count;
 	int	length;
 	int	valid;
 	int	i;
 
-	decimal_point_count = 0;
+	dp_count = 0;
 	length = (int)strlen(param);
 	valid = 1;
 	i = 0;
 	while (i < length)
 	{
 		if (param[i] == '.')
-			decimal_point_count++;
-		else if (!isdigit(param[i]) && (param[i] != '-' || i != 0))
+			dp_count++;
+		else if (!ft_isdigit(param[i]) && (param[i] != '-' || i != 0))
 		{
 			valid = 0;
 			break ;
 		}
 		i++;
 	}
-	if (decimal_point_count > 1)
+	if (dp_count > 1)
 		valid = 0;
 	return (valid);
 }
