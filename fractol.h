@@ -6,7 +6,7 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:25 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/06 15:25:18 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:33:14 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,31 @@
 # include <string.h>
 # include <unistd.h>
 
-# define ERROR_MESSAGE "Enter\n\t\" Mandelbrot\" or\n\t\" Julia <v1> <v2>\""
+# define ERROR_MESSAGE "Enter Mandelbrot or Julia <v1> <v2> or Burning ship"
 
 # define WIDTH 500
 # define HEIGHT 500
 
-# define BLACK 0x000000 
-# define WHITE 0xFFFFFF 
-# define RED 0xFF0000   
-# define GREEN 0x00FF00 
-# define BLUE 0x0000FF  
+# define BLACK 0x000000
+# define WHITE 0xFFFFFF
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
 
 // Psychedelic colors
-# define MAGENTA_BURST 0xFF00FF      
-# define LIME_SHOCK 0xCCFF00         
-# define NEON_ORANGE 0xFF6600        
-# define PSYCHEDELIC_PURPLE 0x660066 
-# define AQUA_DREAM 0x33CCCC         
-# define HOT_PINK 0xFF66B2           
-# define ELECTRIC_BLUE 0x0066FF      
-# define LAVA_RED 0xFF3300           
+# define MAGENTA_BURST 0xFF00FF
+# define LIME_SHOCK 0xCCFF00
+# define NEON_ORANGE 0xFF6600
+# define PSYCHEDELIC_PURPLE 0x660066
+# define AQUA_DREAM 0x33CCCC
+# define HOT_PINK 0xFF66B2
+# define ELECTRIC_BLUE 0x0066FF
+# define LAVA_RED 0xFF3300
 # define NUDE_PINK 0xF2DADF
+# define DEEP_SPACE_BLUE 0x2C2A4A
+# define NEBULA_PURPLE 0x6D2F7E
+# define COSMIC_PINK 0xD84C73
+# define STAR_WHITE 0xF0EADC
 
 typedef struct s_complex
 {
@@ -110,5 +114,5 @@ void			handle_pixel(int x, int y, t_fractol *fractal);
 int				resize_handler(int x, int y, t_fractol *fractol);
 void			my_pixel_put(int x, int y, t_img *img, int color);
 int				ft_isdigit(int c);
-
+void			mandel_vs_julia(t_complex *z, t_complex *c, t_fractol *fractal);
 #endif

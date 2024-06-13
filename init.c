@@ -6,11 +6,25 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:36 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/05 15:16:46 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:10:16 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractol *fractal)
+{
+	if (!ft_strncmp(fractal->name, "julia", 5))
+	{
+		c->x = fractal->julia_x;
+		c->y = fractal->julia_y;
+	}
+	else
+	{
+		c->x = z->x;
+		c->y = z->y;
+	}
+}
 
 static void	malloc_error(void)
 {
@@ -30,12 +44,9 @@ static void	data_init(t_fractol *fractol)
 static void	hook_init(t_fractol *fractol)
 {
 	mlx_key_hook(fractol->mlx_window, key_handler, fractol);
-	mlx_mouse_hook(fractol->mlx_window, mouse_handler,
-		fractol);
-	mlx_hook(fractol->mlx_window, 17, 1L << 17, close_handler,
-		fractol);
-	mlx_hook(fractol->mlx_window, 6, 1L << 6, julia_track,
-		fractol);
+	mlx_mouse_hook(fractol->mlx_window, mouse_handler, fractol);
+	mlx_hook(fractol->mlx_window, 17, 1L << 17, close_handler, fractol);
+	mlx_hook(fractol->mlx_window, 6, 1L << 6, julia_track, fractol);
 }
 
 void	fractal_init(t_fractol *fractal)

@@ -6,25 +6,11 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:57 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/06 15:19:16 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:18:51 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractol *fractal)
-{
-	if (!ft_strncmp(fractal->name, "julia", 5))
-	{
-		c->x = fractal->julia_x;
-		c->y = fractal->julia_y;
-	}
-	else
-	{
-		c->x = z->x;
-		c->y = z->y;
-	}
-}
 
 t_complex	get_mapped_coordinates(int x, int y, t_fractol *fractal)
 {
@@ -45,26 +31,43 @@ t_complex	get_mapped_coordinates(int x, int y, t_fractol *fractal)
 	return (z);
 }
 
-int	get_color_for_pixel(t_complex z, t_complex c, t_fractol *fractal)
+int	iterate_complex(t_complex z, t_complex c, t_fractol *fractal)
 {
-	int				i;
-	t_mappingrange	range_color;
+	int	i;
 
 	i = 0;
 	while (i < fractal->iterations_defintion)
 	{
-		z = ft_sum(ft_square(z), c);
-		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
+		if (ft_strncmp(fractal->name, "julia", 5) == 0)
+			z = ft_sum(ft_square(z), c);
+		else if (ft_strncmp(fractal->name, "mandelbrot", 10) == 0)
+			z = ft_sum(ft_square(z), c);
+		else if (ft_strncmp(fractal->name, "burning_ship", 12) == 0)
 		{
-			range_color.n_min = BLUE;
-			range_color.n_max = PSYCHEDELIC_PURPLE;
-			range_color.o_min = 0;
-			range_color.o_max = fractal->iterations_defintion;
-			return (map(i, range_color));
+			z.x = fabsl(z.x);
+			z.y = fabsl(z.y);
+			z = ft_sum(ft_square(z), c);
 		}
+		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
+			return (i);
 		i++;
 	}
-	return (MAGENTA_BURST);
+	return (fractal->iterations_defintion);
+}
+
+int	get_color_for_pixel(t_complex z, t_complex c, t_fractol *fractal)
+{
+	int				iterations;
+	t_mappingrange	range_color;
+
+	iterations = iterate_complex(z, c, fractal);
+	if (iterations == fractal->iterations_defintion)
+		return (BLACK);
+	range_color.n_min = AQUA_DREAM;
+	range_color.n_max = HOT_PINK;
+	range_color.o_min = 0;
+	range_color.o_max = fractal->iterations_defintion;
+	return (map(iterations, range_color));
 }
 
 void	handle_pixel(int x, int y, t_fractol *fractal)

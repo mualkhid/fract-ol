@@ -6,7 +6,7 @@
 /*   By: mualkhid <mualkhid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:57:13 by mualkhid          #+#    #+#             */
-/*   Updated: 2024/06/06 15:15:26 by mualkhid         ###   ########.fr       */
+/*   Updated: 2024/06/12 17:22:00 by mualkhid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	handle_arrow_keys(t_fractol *fractol, int keycode)
 
 	shift_amount = 0.5 * fractol->zoom;
 	if (keycode == 124)
-		fractol->shift_x += shift_amount;
-	else if (keycode == 123)
 		fractol->shift_x -= shift_amount;
+	else if (keycode == 123)
+		fractol->shift_x += shift_amount;
 }
 
 void	handle_up_down_keys(t_fractol *fractol, int keycode)
